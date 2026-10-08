@@ -40,6 +40,8 @@ jobs:
           grep -q 'GitHub Pages' /tmp/page-_privacy_.html
           grep -q 'IP 地址' /tmp/page-_privacy_.html
           grep -q 'Founder 属于' /tmp/page-_terms_.html
+          grep -q '没有配置自定义最终用户许可协议' /tmp/page-_terms_.html
+          grep -q 'stdeula/' /tmp/page-_terms_.html
           grep -q 'id="faq-1"' /tmp/page-_support_.html
           grep -q '尚未开放兑换' /tmp/page-_support_.html
           echo "PUBLIC_LEGAL_HTTPS_4_OF_4=PASS"
