@@ -5,6 +5,9 @@ on:
     branches: [main]
     paths:
       - .github/workflows/verify-public-https.yml
+      - privacy/**
+      - terms/**
+      - support/**
   workflow_dispatch:
 
 permissions:
@@ -44,4 +47,8 @@ jobs:
           grep -q 'stdeula/' /tmp/page-_terms_.html
           grep -q 'id="faq-1"' /tmp/page-_support_.html
           grep -q '尚未开放兑换' /tmp/page-_support_.html
+          grep -q 'id="operator-contact"' /tmp/page-_privacy_.html
+          grep -q 'id="operator-contact"' /tmp/page-_terms_.html
+          grep -q 'href="#operator-contact"' /tmp/page-_privacy_.html
+          grep -q 'href="#operator-contact"' /tmp/page-_terms_.html
           echo "PUBLIC_LEGAL_HTTPS_4_OF_4=PASS"
