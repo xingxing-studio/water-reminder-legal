@@ -1,0 +1,40 @@
+name: Verify public legal URLs (HTTPS)
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/verify-public-https.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check public HTTPS pages and content
+        shell: bash
+        run: |
+          set -euo pipefail
+          base="https://xingxing-studio.github.io/water-reminder-legal"
+          for route in "/" "/privacy/" "/terms/" "/support/"; do
+            url="$base$route"
+            echo "CHECK_URL=$url"
+            code=$(curl --location --retry 6 --retry-delay 3 --retry-all-errors \
+              --connect-timeout 10 --max-time 40 --silent --show-error \
+              --output "/tmp/page-$(echo "$route" | tr '/' '_').html" \
+              --write-out "%{http_code}" "$url")
+            echo "CHECK_HTTP_STATUS=$code"
+            test "$code" = "200"
+            file="/tmp/page-$(echo "$route" | tr '/' '_').html"
+            grep -q '<title>' "$file"
+            grep -q "到时间喝水啦" "$file"
+          done
+          grep -q '隐私政策' /tmp/page-_privacy_.html
+          grep -q '服务条款' /tmp/page-_terms_.html
+          grep -q '帮助与支持' /tmp/page-_support_.html
+          grep -q '1039672710@qq.com' /tmp/page-_support_.html
+          echo "PUBLIC_LEGAL_HTTPS_4_OF_4=PASS"
