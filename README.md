@@ -14,3 +14,6 @@
 **发布要求**：仓库拥有者需要在 [Settings → Pages](https://github.com/xingxing-studio/water-reminder-legal/settings/pages) 中将 Source 设为 **Deploy from a branch**，Branch 设为 **main / (root)** 并保存。GitHub Pages 会自动发布根目录文件；页面实际返回 HTTPS 200 并经过免登录浏览后，才可以在 App Store Connect 填写网址。
 
 更新法律内容时须重新从产品仓库正式正文生成四个 HTML，避免 App 内与公开政策出现两套矛盾文本。严禁将原私有 App 仓库、密钥、测试数据公开。
+
+
+2026-10-08：与私有产品仓库最新法律原文同步更新（GitHub Pages 安全访问日志说明、Founder 未开放事实、取消订阅及 FAQ 导航）。应用内法律文本需下一 Production Build 才能与新版公开站一致；当前 Build 29 是此前版本。
